@@ -1,6 +1,29 @@
-# CloudUploaderCLI
+# CloudUploader CLI for Azure Blob Storage
 
-## Objective
+## Overview
+
+A Bash-based CLI tool to upload files to Azure Blob Storage.
+
+## Prerequisites
+
+- Azure CLI installed and configured
+- Bash shell
+
+## Usage
+
+To upload a file:
+
+    ```bash
+    ./upload.sh /path/to/file.txt
+    ```    
+
+To upload a file to a specific container:
+
+    ```bash
+    ./upload.sh /path/to/file.txt my-container
+    ```
+
+## Objective(if you want to create a similar tool)
 
 Create a command-line interface (CLI) tool in Bash that allows users to easily upload files to a specified cloud storage provider (e.g., AWS S3, Google Cloud Storage, Azure Blob Storage).
 
