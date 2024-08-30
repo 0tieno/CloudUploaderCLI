@@ -1,68 +1,27 @@
-# CloudUploader CLI
+# CloudUploader CLI for Azure Blob Storage
 
-## Introduction
+## Overview
 
-The `CloudUploader CLI` is a bash script designed for uploading files to Azure Blob Storage. It provides a command-line interface to create an Azure storage account, upload files, and generate shareable links with ease.
+A Bash-based CLI tool to upload files to Azure Blob Storage.
 
 ## Prerequisites
 
-Before using the `CloudUploader CLI`, ensure that you have the following:
+- Azure CLI installed and configured
+- Bash shell
 
-1. **Azure CLI**: Ensure that the Azure CLI is installed and configured. You can download it from [Azure CLI Installation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-2. **`pv` Tool**: Install the `pv` tool for displaying progress during file uploads. Install it using:
+## Usage
 
-   ```bash
-   sudo apt-get install pv
+To upload a file:
 
-## Installation
-
-1. Clone the Repository: Clone the repository containing the clouduploader.sh script.
-
-    `git clone https://github.com/yourusername/clouduploader-cli.git`
-
-2. Navigate to the Directory: Change to the directory where the script is located.
-
-    `cd clouduploader-cli`
-
-3. Make the Script Executable: Make the script executable using the following command:
-
-    `chmod +x clouduploader.sh`
-
-## USAGE
-
-To upload a file to Azure Blob Storage, use the following command:
-  
-`./clouduploader.sh /path/to/your/file`
+    ```bash
+    ./upload.sh /path/to/file.txt
+    ```    
 
 To upload a file to a specific container:
 
-`./clouduploader.sh /path/to/your/file my-container`
-
-## Advanced Features
-
-1. **Public Access**: The script sets the container to public access, allowing anyone with the shareable link to access the file.
-
-2. **Progress Bar**: The pv tool is used to display a progress bar during the file upload, providing a visual indication of the upload progress.
-
-3. **Shareable Link**: After a successful upload, the script generates a shareable URL with a SAS token, which provides temporary access to the uploaded file.
-
-## Troubleshooting
-
-1. **File Not Found Error**: If you receive a "File not found!" error, ensure that the file path provided exists and is correct.
-
-2. `pv` **Command Not Found:** If you get an error about `pv`, ensure that it is installed correctly. You can install it using:
-
-    `sudo apt-get install pv`
-
-3. **Azure CLI Login**: If you encounter an error related to Azure CLI login, ensure that you are logged in using:
-
-    `az login`
-
-4. **Permissions Issues:** If the script fails due to permission issues, check that you have appropriate permissions to create resources in your Azure subscription.
-
-5. **Blob Already Exists:** If the file already exists in the container, the script will fail. You can add the --overwrite flag to replace the existing file.
-
----
+    ```bash
+    ./upload.sh /path/to/file.txt my-container
+    ```
 
 ## Objective(if you want to create a similar tool)
 
