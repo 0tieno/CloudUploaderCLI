@@ -6,51 +6,52 @@
 #version: v1.0
 ###############################################
 
-
-#check if a file path is provided
-if [ -z "$1" ]
-then
-	echo "Usage: clouduploader /path/to/file"
-	exit 1
+# Check if a file path is provided
+if [ -z "$1" ]; then
+    echo "Usage: clouduploader /path/to/file"
+    exit 1
 fi
 
 FILE=$1
 
-#check if the file exists
-if [ ! -f "$FILE"]
-then
-	echo "File not found!"
-	exit 2
+# Check if the file exists
+if [ ! -f "$FILE" ]; then
+    echo "File not found!"
+    exit 2
 fi
 
-#create azure storage account 
+# Create Azure storage account (only run this once, or if you need to recreate the account)
 az storage account create --name cliuploader --resource-group rg-cliuploader --location eastus --sku Standard_LRS
 
-#create container in the storage account
+# Create container in the storage account
+az storage container create --name cliuploadercontainer --account-name cliuploader
 
-az storage container create --name cliuploadcontainer --account-name cliuploader
+# Set the container to public access level
+az storage container set-permission --name cliuploadercontainer --account-name cliuploader --public-access container
 
-#retrieve the connection string for your storage account
-az storage account show-connection-string --name cliuploader --resource-group rg-cliuploader
+# Retrieve the connection string for your storage account
+CONNECTION_STRING=$(az storage account show-connection-string --name cliuploader --resource-group rg-cliuploader --output tsv)
 
-#store this connection in an env variable for use in your script
+# Export connection string for use in upload command
+export AZURE_STORAGE_CONNECTION_STRING="$CONNECTION_STRING"
 
-export AZURE_STORAGE_CONNECTION_STRING="az storage account show-connection-string --name cliuploader --resource-group
-rg-cliuploader
-"
+# Upload to Azure Blob Storage with progress bar
+pv "$FILE" | az storage blob upload --account-name cliuploader --container-name cliuploadercontainer --name "$(basename $FILE)" --overwrite --file-
 
-#upload to azure blob storage
+# Generate a SAS token for the blob
+SAS_TOKEN=$(az storage blob generate-sas --account-name cliuploader --container-name cliuploadercontainer --name "$(basename $FILE)" --permissions r --expiry $(date -d '+1 day' -u +"%Y-%m-%dT%H:%MZ") --output tsv)
 
-az storage blob upload --account-name cliuploader --container-name cliuploadercontainer --file "$FILE" --name "$(basename $FILE)"
+# Construct the shareable URL
+SHAREABLE_URL="https://cliuploader.blob.core.windows.net/cliuploadercontainer/$(basename $FILE)?$SAS_TOKEN"
 
-if [ $? -eq 0 ]
-then 
-	echo "File uploaded successfully to azure blob storage"
+# Display the shareable URL
+echo "Shareable link: $SHAREABLE_URL"
+
+# Check for successful upload
+if [ $? -eq 0 ]; then
+    echo "File uploaded successfully to Azure Blob Storage"
 else
-	echo "file upload failed."
-	exit 1
+    echo "File upload failed."
+    exit 1
 fi
-
-
-
 
