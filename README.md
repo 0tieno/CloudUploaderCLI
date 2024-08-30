@@ -23,21 +23,27 @@ Before using the `CloudUploader CLI`, ensure that you have the following:
 
 2. Navigate to the Directory: Change to the directory where the script is located.
 
-    `cd clouduploader-cli`
+    ```bash
+    cd clouduploader-cli
 
 3. Make the Script Executable: Make the script executable using the following command:
 
-    `chmod +x clouduploader.sh`
+    ```bash
+    chmod +x clouduploader.sh
 
 ## USAGE
 
 To upload a file to Azure Blob Storage, use the following command:
   
-`./clouduploader.sh /path/to/your/file`
+```bash
+./clouduploader.sh /path/to/your/file
+```
 
 To upload a file to a specific container:
 
-`./clouduploader.sh /path/to/your/file my-container`
+```bash
+./clouduploader.sh /path/to/your/file my-container
+```
 
 ## Advanced Features
 
@@ -53,11 +59,15 @@ To upload a file to a specific container:
 
 2. `pv` **Command Not Found:** If you get an error about `pv`, ensure that it is installed correctly. You can install it using:
 
-    `sudo apt-get install pv`
+    ```bash
+    sudo apt-get install pv
+    ```
 
 3. **Azure CLI Login**: If you encounter an error related to Azure CLI login, ensure that you are logged in using:
 
-    `az login`
+    ```bash
+    az login
+    ```
 
 4. **Permissions Issues:** If the script fails due to permission issues, check that you have appropriate permissions to create resources in your Azure subscription.
 
