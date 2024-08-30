@@ -18,7 +18,8 @@ Before using the `CloudUploader CLI`, ensure that you have the following:
 
 1. Clone the Repository: Clone the repository containing the clouduploader.sh script.
 
-    `git clone https://github.com/yourusername/clouduploader-cli.git`
+    ```bash
+    git clone https://github.com/yourusername/clouduploader-cli.git
 
 2. Navigate to the Directory: Change to the directory where the script is located.
 
