@@ -1,5 +1,7 @@
 # CloudUploader CLI
 
+![success-demo-image](images/success-demo.png)
+
 ## What is this `CloudUploader CLI`?
 
 The `CloudUploader CLI` is a bash script designed for uploading files to Azure Blob Storage. It provides a command-line interface to create an Azure storage account, upload files, and generate shareable links with ease.
