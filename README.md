@@ -13,23 +13,27 @@ Before using the `CloudUploader CLI`, ensure that you have the following:
 
    ```bash
    sudo apt-get install pv
+   ```
 
 ## Installation
 
 1. Clone the Repository: Clone the repository containing the clouduploader.sh script.
 
     ```bash
-    git clone https://github.com/yourusername/clouduploader-cli.git
+    git clone https://github.com/0tieno/CloudUploaderCLI.git
+    ```
 
 2. Navigate to the Directory: Change to the directory where the script is located.
 
     ```bash
-    cd clouduploader-cli
+    cd CloudUploaderCLI
+    ```
 
 3. Make the Script Executable: Make the script executable using the following command:
 
     ```bash
     chmod +x clouduploader.sh
+    ```
 
 ## USAGE
 
